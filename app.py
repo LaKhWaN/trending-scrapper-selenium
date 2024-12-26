@@ -9,16 +9,29 @@ import json
 import pymongo
 from bson import ObjectId
 
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+
 app = Flask(__name__)
 
 client = pymongo.MongoClient("mongodb+srv://lakhwanus009:MqLqLwDq79sOBZjh@cluster0.3qimy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 db = client["trending_db"]
 collection = db["trends"]
 
+# def setup_driver():
+#     driver = webdriver.Chrome()
+#     return driver
 def setup_driver():
-    driver = webdriver.Chrome()
-    return driver
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")  # Run in headless mode
+    chrome_options.add_argument("--no-sandbox")  # Bypass OS security model
+    chrome_options.add_argument("--disable-dev-shm-usage")  # Overcome limited resource problems
 
+    # Use WebDriverManager to automatically manage ChromeDriver
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service, options=chrome_options)
+    return driver
 def get_random_proxy():
     with open('proxies.txt', 'r') as f:
         proxies = f.readlines()
