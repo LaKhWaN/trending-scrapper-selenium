@@ -4,10 +4,17 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from datetime import datetime
-import socket
 import random
+import json
+import pymongo
+from bson import ObjectId
 
 app = Flask(__name__)
+
+# MongoDB Setup (assuming MongoDB is running locally)
+client = pymongo.MongoClient("mongodb+srv://lakhwanus009:MqLqLwDq79sOBZjh@cluster0.3qimy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+db = client["trending_db"]
+collection = db["trends"]
 
 # Function to set up Selenium WebDriver
 def setup_driver():
@@ -15,10 +22,9 @@ def setup_driver():
     return driver
 
 def get_random_proxy():
-    f = open('proxies.txt', 'r')
-    lines = f.readlines()
-    f.close()
-    return random.choice(lines).strip()
+    with open('proxies.txt', 'r') as f:
+        proxies = f.readlines()
+    return random.choice(proxies).strip()
 
 # Function to fetch trending topics using Selenium
 def fetch_trending_topics():
@@ -75,7 +81,25 @@ def fetch_trending_topics():
     finally:
         driver.quit()
 
-    return result_dict
+    # print("Result Dict:\n", result_dict)
+    # Save data to MongoDB
+    trends_data = {}
+    for index, trend in result_dict.items():
+        trends_data[f"nameoftrend{index}"] = trend[2]
+
+    # Save the data to MongoDB
+    collection.insert_one({
+        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "trends": trends_data
+    })
+
+    return trends_data
+
+# Custom JSON encoder to handle ObjectId serialization
+def mongo_json_serializer(obj):
+    if isinstance(obj, ObjectId):
+        return str(obj)  # Convert ObjectId to string
+    raise TypeError(f"Type {type(obj)} not serializable")
 
 @app.route('/')
 def index():
@@ -88,14 +112,30 @@ def run_script():
     ip_address = get_random_proxy()
 
     # Prepare data for display
-    trend_names = [details for details in list(trending_topics.values())[:5]]
-    
-    print(trend_names)
+    trend_names = [trend for trend in trending_topics.values()]
+    # print(trending_topics)
+    # print(trend_names)
+
+    # Fetch last record from MongoDB
+    last_record = collection.find().sort("timestamp", -1).limit(1)
+    json_record = {}
+
+    for record in last_record:
+        json_record = {
+            "_id": str(record["_id"]),  # Convert ObjectId to string
+            "timestamp": record["timestamp"],
+            **record["trends"]
+        }
+
+    # Serialize the data to JSON
+    json_record_str = json.dumps(json_record, default=mongo_json_serializer, indent=4)
+
     return render_template(
         'result.html',
         datetime=now,
         ip=ip_address,
-        trends=trend_names
+        trends=trend_names,
+        json_record=json_record_str
     )
 
 if __name__ == '__main__':
