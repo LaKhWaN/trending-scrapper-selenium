@@ -129,7 +129,7 @@
         "kind": 2,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "def index():\n    return render_template('index.html')\n@app.route('/run-script')\ndef run_script():\n    trending_topics = fetch_trending_topics()\n    now = datetime.now().strftime(\"%Y-%m-%d %H:%M:%S\")\n    ip_address = get_random_proxy()\n    # Prepare data for display\n    # trend_names = [details[1] for details in trending_topics.values()[:5]]\n    trend_names = [details for details in list(trending_topics.values())[:5]]",
+        "peekOfCode": "def index():\n    return render_template('index.html')\n@app.route('/run-script')\ndef run_script():\n    trending_topics = fetch_trending_topics()\n    now = datetime.now().strftime(\"%Y-%m-%d %H:%M:%S\")\n    ip_address = get_random_proxy()\n    # Prepare data for display\n    trend_names = [details for details in list(trending_topics.values())[:5]]\n    print(trend_names)",
         "detail": "app",
         "documentation": {}
     },
@@ -138,7 +138,7 @@
         "kind": 2,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "def run_script():\n    trending_topics = fetch_trending_topics()\n    now = datetime.now().strftime(\"%Y-%m-%d %H:%M:%S\")\n    ip_address = get_random_proxy()\n    # Prepare data for display\n    # trend_names = [details[1] for details in trending_topics.values()[:5]]\n    trend_names = [details for details in list(trending_topics.values())[:5]]\n    print(trend_names)\n    return render_template(\n        'result.html',",
+        "peekOfCode": "def run_script():\n    trending_topics = fetch_trending_topics()\n    now = datetime.now().strftime(\"%Y-%m-%d %H:%M:%S\")\n    ip_address = get_random_proxy()\n    # Prepare data for display\n    trend_names = [details for details in list(trending_topics.values())[:5]]\n    print(trend_names)\n    return render_template(\n        'result.html',\n        datetime=now,",
         "detail": "app",
         "documentation": {}
     },

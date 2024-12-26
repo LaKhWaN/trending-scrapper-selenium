@@ -88,7 +88,6 @@ def run_script():
     ip_address = get_random_proxy()
 
     # Prepare data for display
-    # trend_names = [details[1] for details in trending_topics.values()[:5]]
     trend_names = [details for details in list(trending_topics.values())[:5]]
     
     print(trend_names)
