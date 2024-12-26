@@ -115,35 +115,11 @@
         "documentation": {}
     },
     {
-        "label": "Options",
-        "importPath": "selenium.webdriver.chrome.options",
-        "description": "selenium.webdriver.chrome.options",
-        "isExtraImport": true,
-        "detail": "selenium.webdriver.chrome.options",
-        "documentation": {}
-    },
-    {
-        "label": "Service",
-        "importPath": "selenium.webdriver.chrome.service",
-        "description": "selenium.webdriver.chrome.service",
-        "isExtraImport": true,
-        "detail": "selenium.webdriver.chrome.service",
-        "documentation": {}
-    },
-    {
-        "label": "ChromeDriverManager",
-        "importPath": "webdriver_manager.chrome",
-        "description": "webdriver_manager.chrome",
-        "isExtraImport": true,
-        "detail": "webdriver_manager.chrome",
-        "documentation": {}
-    },
-    {
         "label": "setup_driver",
         "kind": 2,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "def setup_driver():\n    chrome_options = Options()\n    chrome_options.add_argument(\"--headless\")  # Run in headless mode\n    chrome_options.add_argument(\"--no-sandbox\")  # Bypass OS security model\n    chrome_options.add_argument(\"--disable-dev-shm-usage\")  # Overcome limited resource problems\n    # Use WebDriverManager to automatically manage ChromeDriver\n    service = Service(ChromeDriverManager().install())\n    driver = webdriver.Chrome(service=service, options=chrome_options)\n    return driver\ndef get_random_proxy():",
+        "peekOfCode": "def setup_driver():\n    driver = webdriver.Chrome()\n    return driver\ndef get_random_proxy():\n    with open('proxies.txt', 'r') as f:\n        proxies = f.readlines()\n    return random.choice(proxies).strip()\ndef fetch_trending_topics():\n    driver = setup_driver()\n    result_dict = {}",
         "detail": "app",
         "documentation": {}
     },
@@ -197,7 +173,7 @@
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "app = Flask(__name__)\nclient = pymongo.MongoClient(\"mongodb+srv://lakhwanus009:MqLqLwDq79sOBZjh@cluster0.3qimy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0\")\ndb = client[\"trending_db\"]\ncollection = db[\"trends\"]\n# def setup_driver():\n#     driver = webdriver.Chrome()\n#     return driver\ndef setup_driver():\n    chrome_options = Options()\n    chrome_options.add_argument(\"--headless\")  # Run in headless mode",
+        "peekOfCode": "app = Flask(__name__)\nclient = pymongo.MongoClient(\"mongodb+srv://lakhwanus009:MqLqLwDq79sOBZjh@cluster0.3qimy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0\")\ndb = client[\"trending_db\"]\ncollection = db[\"trends\"]\ndef setup_driver():\n    driver = webdriver.Chrome()\n    return driver\ndef get_random_proxy():\n    with open('proxies.txt', 'r') as f:\n        proxies = f.readlines()",
         "detail": "app",
         "documentation": {}
     },
@@ -206,7 +182,7 @@
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "client = pymongo.MongoClient(\"mongodb+srv://lakhwanus009:MqLqLwDq79sOBZjh@cluster0.3qimy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0\")\ndb = client[\"trending_db\"]\ncollection = db[\"trends\"]\n# def setup_driver():\n#     driver = webdriver.Chrome()\n#     return driver\ndef setup_driver():\n    chrome_options = Options()\n    chrome_options.add_argument(\"--headless\")  # Run in headless mode\n    chrome_options.add_argument(\"--no-sandbox\")  # Bypass OS security model",
+        "peekOfCode": "client = pymongo.MongoClient(\"mongodb+srv://lakhwanus009:MqLqLwDq79sOBZjh@cluster0.3qimy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0\")\ndb = client[\"trending_db\"]\ncollection = db[\"trends\"]\ndef setup_driver():\n    driver = webdriver.Chrome()\n    return driver\ndef get_random_proxy():\n    with open('proxies.txt', 'r') as f:\n        proxies = f.readlines()\n    return random.choice(proxies).strip()",
         "detail": "app",
         "documentation": {}
     },
@@ -215,7 +191,7 @@
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "db = client[\"trending_db\"]\ncollection = db[\"trends\"]\n# def setup_driver():\n#     driver = webdriver.Chrome()\n#     return driver\ndef setup_driver():\n    chrome_options = Options()\n    chrome_options.add_argument(\"--headless\")  # Run in headless mode\n    chrome_options.add_argument(\"--no-sandbox\")  # Bypass OS security model\n    chrome_options.add_argument(\"--disable-dev-shm-usage\")  # Overcome limited resource problems",
+        "peekOfCode": "db = client[\"trending_db\"]\ncollection = db[\"trends\"]\ndef setup_driver():\n    driver = webdriver.Chrome()\n    return driver\ndef get_random_proxy():\n    with open('proxies.txt', 'r') as f:\n        proxies = f.readlines()\n    return random.choice(proxies).strip()\ndef fetch_trending_topics():",
         "detail": "app",
         "documentation": {}
     },
@@ -224,7 +200,7 @@
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "collection = db[\"trends\"]\n# def setup_driver():\n#     driver = webdriver.Chrome()\n#     return driver\ndef setup_driver():\n    chrome_options = Options()\n    chrome_options.add_argument(\"--headless\")  # Run in headless mode\n    chrome_options.add_argument(\"--no-sandbox\")  # Bypass OS security model\n    chrome_options.add_argument(\"--disable-dev-shm-usage\")  # Overcome limited resource problems\n    # Use WebDriverManager to automatically manage ChromeDriver",
+        "peekOfCode": "collection = db[\"trends\"]\ndef setup_driver():\n    driver = webdriver.Chrome()\n    return driver\ndef get_random_proxy():\n    with open('proxies.txt', 'r') as f:\n        proxies = f.readlines()\n    return random.choice(proxies).strip()\ndef fetch_trending_topics():\n    driver = setup_driver()",
         "detail": "app",
         "documentation": {}
     }
