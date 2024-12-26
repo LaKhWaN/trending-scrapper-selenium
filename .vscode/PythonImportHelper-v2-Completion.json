@@ -1,0 +1,154 @@
+[
+    {
+        "label": "Flask",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "render_template",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "redirect",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "url_for",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "webdriver",
+        "importPath": "selenium",
+        "description": "selenium",
+        "isExtraImport": true,
+        "detail": "selenium",
+        "documentation": {}
+    },
+    {
+        "label": "By",
+        "importPath": "selenium.webdriver.common.by",
+        "description": "selenium.webdriver.common.by",
+        "isExtraImport": true,
+        "detail": "selenium.webdriver.common.by",
+        "documentation": {}
+    },
+    {
+        "label": "WebDriverWait",
+        "importPath": "selenium.webdriver.support.ui",
+        "description": "selenium.webdriver.support.ui",
+        "isExtraImport": true,
+        "detail": "selenium.webdriver.support.ui",
+        "documentation": {}
+    },
+    {
+        "label": "expected_conditions",
+        "importPath": "selenium.webdriver.support",
+        "description": "selenium.webdriver.support",
+        "isExtraImport": true,
+        "detail": "selenium.webdriver.support",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "socket",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "socket",
+        "description": "socket",
+        "detail": "socket",
+        "documentation": {}
+    },
+    {
+        "label": "random",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "random",
+        "description": "random",
+        "detail": "random",
+        "documentation": {}
+    },
+    {
+        "label": "setup_driver",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def setup_driver():\n    driver = webdriver.Chrome()\n    return driver\ndef get_random_proxy():\n    f = open('proxies.txt', 'r')\n    lines = f.readlines()\n    f.close()\n    return random.choice(lines).strip()\n# Function to fetch trending topics using Selenium\ndef fetch_trending_topics():",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "get_random_proxy",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def get_random_proxy():\n    f = open('proxies.txt', 'r')\n    lines = f.readlines()\n    f.close()\n    return random.choice(lines).strip()\n# Function to fetch trending topics using Selenium\ndef fetch_trending_topics():\n    driver = setup_driver()\n    result_dict = {}\n    try:",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "fetch_trending_topics",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def fetch_trending_topics():\n    driver = setup_driver()\n    result_dict = {}\n    try:\n        driver.get(\"https://x.com/login\")\n        # Login process (replace with actual credentials)\n        WebDriverWait(driver, 10).until(\n            EC.visibility_of_element_located((By.CSS_SELECTOR, \"input[name='text']\"))\n        ).send_keys(\"upenderlakhwan\")\n        WebDriverWait(driver, 10).until(",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "index",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def index():\n    return render_template('index.html')\n@app.route('/run-script')\ndef run_script():\n    trending_topics = fetch_trending_topics()\n    now = datetime.now().strftime(\"%Y-%m-%d %H:%M:%S\")\n    ip_address = get_random_proxy()\n    # Prepare data for display\n    # trend_names = [details[1] for details in trending_topics.values()[:5]]\n    trend_names = [details for details in list(trending_topics.values())[:5]]",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "run_script",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def run_script():\n    trending_topics = fetch_trending_topics()\n    now = datetime.now().strftime(\"%Y-%m-%d %H:%M:%S\")\n    ip_address = get_random_proxy()\n    # Prepare data for display\n    # trend_names = [details[1] for details in trending_topics.values()[:5]]\n    trend_names = [details for details in list(trending_topics.values())[:5]]\n    print(trend_names)\n    return render_template(\n        'result.html',",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "app = Flask(__name__)\n# Function to set up Selenium WebDriver\ndef setup_driver():\n    driver = webdriver.Chrome()\n    return driver\ndef get_random_proxy():\n    f = open('proxies.txt', 'r')\n    lines = f.readlines()\n    f.close()\n    return random.choice(lines).strip()",
+        "detail": "app",
+        "documentation": {}
+    }
+]

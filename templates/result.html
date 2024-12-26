@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Trending Topics</title>
+</head>
+<body>
+    <h1>Trending Topics</h1>
+    <p>These are the most happening topics as on {{ datetime }}:</p>
+    <ul>
+        {% for trend in trends %}
+            <li>{{ trend[-2] }} - {{trend[-1]}}</li>
+        {% endfor %}
+    </ul>
+    <p>The IP address used for this query was {{ ip }}.</p>
+</body>
+</html>
