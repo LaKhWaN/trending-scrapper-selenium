@@ -32,13 +32,13 @@ def fetch_trending_topics():
 
         WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located((By.CSS_SELECTOR, "input[name='text']"))
-        ).send_keys("upenderlakhwan")
+        ).send_keys("your_twitter_username")
         WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.XPATH, "//span[text()='Next']"))
         ).click()
         WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located((By.CSS_SELECTOR, "input[name='password']"))
-        ).send_keys("Upender9@")
+        ).send_keys("your_twitter_password")
         WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.XPATH, "//span[text()='Log in']"))
         ).click()
